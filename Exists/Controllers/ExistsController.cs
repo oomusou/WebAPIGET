@@ -14,7 +14,7 @@ namespace Exists.Controllers
 
         // GET api/exists/:username
         [HttpGet("{username}")]
-        public ActionResult<Response> Get(string username)
+        public ActionResult<Response> CheckMember(string username)
         {
             return _members
                 .Where(IsMember)
@@ -22,8 +22,7 @@ namespace Exists.Controllers
                 .Select(Result)
                 .FirstOrDefault();
 
-            bool IsMember(Member x)
-                => x.Username == username;
+            bool IsMember(Member x) => x.Username == username;
 
             Member DefaultMember()
                 => new Member {Username = string.Empty, Password = string.Empty};
