@@ -9,11 +9,9 @@ namespace Exists.Controllers
     [ApiController]
     public class ExistsController : ControllerBase
     {
-        private readonly List<Member> _members = new List<Member>
-        {
-            new Member {Username = "Sam", Password = "1234"}
-        };
-        
+        private readonly List<Member> _members
+            = new List<Member> {new Member {Username = "Sam", Password = "1234"}};
+
         // GET api/exists/:username
         [HttpGet("{username}")]
         public ActionResult<Response> Get(string username)
@@ -23,7 +21,7 @@ namespace Exists.Controllers
                 .DefaultIfEmpty(DefaultMember())
                 .Select(Result)
                 .FirstOrDefault();
-            
+
             bool IsMember(Member x)
                 => x.Username == username;
 
@@ -31,10 +29,7 @@ namespace Exists.Controllers
                 => new Member {Username = string.Empty, Password = string.Empty};
 
             Response Result(Member x)
-                => new Response
-                {
-                    Exists = !string.IsNullOrEmpty(x.Username)
-                };
+                => new Response {Exists = !string.IsNullOrEmpty(x.Username)};
         }
     }
 }
