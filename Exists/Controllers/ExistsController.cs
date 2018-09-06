@@ -20,7 +20,7 @@ namespace Exists.Controllers
                 .Where(IsMember)
                 .DefaultIfEmpty(DefaultMember())
                 .Select(Result)
-                .FirstOrDefault();
+                .First();
 
             bool IsMember(Member x) => x.Username == username;
 
